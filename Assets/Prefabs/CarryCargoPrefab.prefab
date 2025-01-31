@@ -442,9 +442,10 @@ GameObject:
   - component: {fileID: 7141922243048193982}
   - component: {fileID: 7117458053627715307}
   - component: {fileID: 4903590860629110296}
-  - component: {fileID: 1973597383508568988}
   - component: {fileID: 3595288176631707910}
   - component: {fileID: 6478275355603561290}
+  - component: {fileID: 7243759226883699853}
+  - component: {fileID: 3845928832067395924}
   m_Layer: 0
   m_Name: Agent
   m_TagString: Untagged
@@ -573,27 +574,6 @@ MonoBehaviour:
   m_UseChildActuators: 1
   m_DeterministicInference: 0
   m_ObservableAttributeHandling: 0
---- !u!114 &1973597383508568988
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6472222052142883002}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3a4c57b52d0d91b45993da66415b9753, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  agentParameters:
-    maxStep: 0
-  hasUpgradedFromAgentParameters: 1
-  MaxStep: 1000
-  agent: {fileID: 3603564131645636171}
-  cargo: {fileID: 5542757337245008675}
-  target: {fileID: 9005471456089134993}
-  movementSpeed: 2
-  timelimit: 10
 --- !u!114 &3595288176631707910
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -636,6 +616,43 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &7243759226883699853
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6472222052142883002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88b6042bc9a5d4aa58d931eae49442e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  agentParameters:
+    maxStep: 0
+  hasUpgradedFromAgentParameters: 1
+  MaxStep: 0
+--- !u!114 &3845928832067395924
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6472222052142883002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73c89d7480749124fb50c4f6ba0ca49e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  agentParameters:
+    maxStep: 0
+  hasUpgradedFromAgentParameters: 1
+  MaxStep: 1000
+  agent: {fileID: 3603564131645636171}
+  cargo: {fileID: 5542757337245008675}
+  target: {fileID: 9005471456089134993}
+  movementSpeed: 2
+  timelimit: 600
 --- !u!1 &6629161498942420686
 GameObject:
   m_ObjectHideFlags: 0
