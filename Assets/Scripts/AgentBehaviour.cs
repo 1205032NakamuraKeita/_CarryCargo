@@ -11,7 +11,8 @@ public class AgentBehaviour : Agent
     public Transform cargo; // 荷物
     public Transform target; // ゴール
 
-    private Rigidbody magnetRb;
+    //private Rigidbody magnetRb;
+    private Rigidbody cargoRb;
     private float countup = 0.0f;
 
     private Vector3 startAgentPos = Vector3.zero;
@@ -22,13 +23,14 @@ public class AgentBehaviour : Agent
 
     [Header("設定値")]
     public float movementSpeed = 2.0f;
-    public float timelimit = 600.0f;
+    public float timelimit = 10.0f;
 
     void Start()
     {
         startAgentPos = agent.position;
         startCargoPos = cargo.position;
-        magnetRb = GetComponent<Rigidbody>();
+        //magnetRb = GetComponent<Rigidbody>();
+        cargoRb = cargo.GetComponent<Rigidbody>();
     }
     private void Update()
     {
@@ -41,14 +43,16 @@ public class AgentBehaviour : Agent
         agent.position = startAgentPos;
         cargo.position = startCargoPos;
         // 加速度リセット
-        magnetRb.velocity = Vector3.zero;
+        //magnetRb.velocity = Vector3.zero;
+        cargoRb.velocity = Vector3.zero;
+        cargoRb.angularVelocity = Vector3.zero;
         // カウントリセット
         countup = 0.0f;
         //運んでいるフラグをリセット
         m_bCurry = false;
         // ゴールの位置をランダム化
         target.localPosition = new Vector3(
-            Random.Range(-4.0f, 4.0f), -0.3f, Random.Range(-4.0f, 4.0f)
+            Random.Range(-4.0f, 4.0f), 0f, Random.Range(-4.0f, 4.0f)
         );
     }
 
@@ -74,26 +78,27 @@ public class AgentBehaviour : Agent
         // マグネットの動き
         agent.localPosition += new Vector3(move.x, move.y, move.z) * movementSpeed * Time.deltaTime;
 
-        float currentTargetDistance = Vector3.Distance(cargo.position, target.position);
+        float currentTargetDistance = Vector3.Distance(agent.position, target.position);
         float currentCargoDistance = Vector3.Distance(cargo.position, agent.position);
         // 荷物の吸着処理
-        if (currentTargetDistance < 1.0f)
+        if (currentCargoDistance < 0.5f)
         {
             cargo.position = agent.position;
             m_bCurry = true;
+            //Debug.Log("荷物を持った！");
             AddReward(0.5f); // 吸着報酬
         }
-        if (m_bCurry)
+        if (m_bCurry==true)
         {
             //前フレームより距離が近くなっていたら
             if (currentTargetDistance < previousTargetDistance)
             {
-                AddReward(0.01f); // ゴールに近づくたびに少し報酬
+                AddReward(0.05f); // ゴールに近づくたびに少し報酬
                 //Debug.Log("近づいている！");
             }
             else
             {
-                AddReward(-0.01f); // 遠ざかるとペナルティ
+                AddReward(-0.05f); // 遠ざかるとペナルティ
                 //Debug.Log("遠ざかっている！");
             }
             previousTargetDistance = currentTargetDistance;
@@ -124,7 +129,7 @@ public class AgentBehaviour : Agent
         }
         if (cargo.position.y < -0.5f)
         {
-            AddReward(-0.5f); // 荷物が地面に触れる
+            AddReward(-5.0f); // 荷物が地面に触れる
             Debug.Log("落としてしまった！");
             EndEpisode();
         }
@@ -143,6 +148,6 @@ public class AgentBehaviour : Agent
         var action = actionsOut.ContinuousActions;
         action[0] = Input.GetAxis("Horizontal");
         action[1] = Input.GetAxis("Vertical");
-        action[2] = Input.GetAxis("Forward");
+        action[2] = Input.GetAxis("Vertical");
     }
 }

@@ -373,6 +373,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1849827500845370485, guid: d921cd10ba6cf6641bf92de3a9dc4034, type: 3}
+      propertyPath: m_Model
+      value: 
+      objectReference: {fileID: 5022602860645237092, guid: d2ebe98969c419e43a92160285ff3083, type: 3}
     - target: {fileID: 4903590860629110296, guid: d921cd10ba6cf6641bf92de3a9dc4034, type: 3}
       propertyPath: m_Model
       value: 
@@ -420,6 +424,10 @@ PrefabInstance:
     - target: {fileID: 6629161498942420686, guid: d921cd10ba6cf6641bf92de3a9dc4034, type: 3}
       propertyPath: m_Name
       value: CarryCargoPrefab (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6629161498942420686, guid: d921cd10ba6cf6641bf92de3a9dc4034, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
